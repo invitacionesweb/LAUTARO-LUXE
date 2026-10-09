@@ -24,7 +24,7 @@ const CONFIG = {
   scriptFormUrl: "https://script.google.com/macros/s/AKfycbycs_iBBEAsvA88MQxjkmlActrWE3c_RsouhAV4XnSrS3XlLxqmY8j1fkgaQmSbMoKS/exec",
 
   // --- AUDIO ---
-  archivoAudio: "./FCMELODICO.mp3",
+  archivoAudio: "./violinfelizc.mp3",
 
   // --- COLORES (propuesta selva: verdes y arena) ---
   colores: {
