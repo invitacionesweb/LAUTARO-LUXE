@@ -93,6 +93,9 @@
             <select name="INVITADOS" id="select-invitados" required>
                 <option value="" disabled selected>¿Cuántos lugares necesitás?</option>
             </select>
+            <select name="MENORES" id="select-menores" required>
+                <option value="" disabled selected>De esos, ¿cuántos son menores de 10 años?</option>
+            </select>
             <input type="text" name="NOMBRE" placeholder="Nombre" required />
             <input type="text" name="APELLIDO" placeholder="Apellido" required />
             <textarea
@@ -102,7 +105,6 @@
             <button type="submit" class="boton">Enviar</button>
         </form>
     </div>
-
 <!--    <div class="fotos">
         <img src="./img-editable/fotos2.png" alt="">
         <div class="icono2">
@@ -156,6 +158,25 @@
                 opt.textContent = i + (i === 1 ? " persona" : " personas");
                 select.appendChild(opt);
             }
+                        // Opciones del select de menores (0 hasta lo que eligieron en invitados)
+            const selectMenores = document.getElementById("select-menores");
+            const selectInvitados = document.getElementById("select-invitados");
+
+            function cargarMenores() {
+                const max = parseInt(selectInvitados.value) || CONFIG.maxInvitados;
+                const elegido = selectMenores.value;
+                selectMenores.querySelectorAll("option:not([disabled])").forEach(o => o.remove());
+                for (let i = 0; i <= max; i++) {
+                    const opt = document.createElement("option");
+                    opt.value = i;
+                    opt.textContent = i === 0 ? "Ninguno" : i + (i === 1 ? " menor" : " menores");
+                    selectMenores.appendChild(opt);
+                }
+                if (elegido !== "" && parseInt(elegido) <= max) selectMenores.value = elegido;
+            }
+
+            cargarMenores();
+            selectInvitados.addEventListener("change", cargarMenores);
 
             // Action del form (sigue saliendo de config.js)
             if (cfg.scriptFormUrl) {
